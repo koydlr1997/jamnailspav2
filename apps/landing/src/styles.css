@@ -1,0 +1,205 @@
+@import "tailwindcss";
+@import "./styles/fonts.css";
+
+@theme {
+  --spacing-hero-sequence: 400vh;
+  --spacing-strike: 2px;
+  --font-brand: "Ngetic Modern", serif;
+  --font-changa: "Changa One", sans-serif;
+  --font-passion: "Passion One", sans-serif;
+  --font-oswald: "Oswald", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --text-brand: 40px;
+  --text-brand-mobile: 32px;
+  --text-services-plus: 32px;
+  --text-hero-title: 3.5rem;
+  --text-hero-title-tablet: 6rem;
+  --text-hero-title-desktop: 8.25rem;
+  --text-service-category: 1.75rem;
+  --text-service-category-tablet: 3rem;
+  --text-service-category-desktop: 4.125rem;
+  --text-service-subcategory: 1.134rem;
+  --text-service-subcategory-tablet: 1.944rem;
+  --text-service-subcategory-desktop: 2.673rem;
+  --tracking-hero-title: -0.02em;
+  --color-surface: #ffffff;
+  --color-hero: #ffffff;
+  --color-hero-frame-light: #f8dfd5;
+  --color-hero-frame-warm: #f2cfc0;
+  --color-services: #fbece7;
+  --spacing-services-names: 40%;
+  --spacing-services-top: 40%;
+  --spacing-services-details: 8rem;
+  --spacing-service-price: 84.15px;
+  --leading-service-note: 15px;
+  --spacing-service-groups: 73.6px;
+  --spacing-services-names-tablet: 40%;
+  --spacing-services-label-tablet: calc(8rem + 70px);
+  --spacing-services-label-offset: calc(13rem + 60px);
+  --color-intro: #ff7518;
+  --color-ink: #000000;
+  --color-service-inactive: #b0b0b0;
+  --color-service-active: #4a2511;
+  --color-subcategory-inactive: #cccccc;
+  --color-subcategory-active: #c2410c;
+  --color-strike: #ff7518;
+  --color-hero-title-left: #e11d2e;
+  --color-hero-tint: #ff7518;
+  --spacing-strike-overhang: 0.25rem;
+  --color-divider: #0000001f;
+  --color-glass: rgb(255 255 255 / 12%);
+  --color-navbar-overlay: rgb(20 17 13 / 78%);
+  --blur-glass: 16px;
+  --spacing-navbar: 1.5rem;
+  --spacing-navbar-mobile: 15px;
+  --spacing-menu-touch: 44px;
+  --spacing-menu-icon: 28px;
+  --spacing-menu-line: 3px;
+  --spacing-menu-gap: 5px;
+  --spacing-navbar-tablet: 2rem;
+  --spacing-navbar-desktop: 3rem;
+  --spacing-logo: 0.625rem;
+  --spacing-brand-icon: 24px;
+  --spacing-navbar-height: 4rem;
+  --spacing-navbar-inset: 0.875rem;
+  --spacing-hero-title: 3rem;
+}
+
+/* Add approved brand colors and spacing here later.
+   This theme can move into packages/ui without changing component classes. */
+
+.hero-frame-background {
+  background: radial-gradient(ellipse at center, var(--color-hero-frame-light) 0%, var(--color-hero-frame-warm) 100%);
+}
+
+.hero-frame-image {
+  mask-image:
+    linear-gradient(to right, transparent, black 6%, black 94%, transparent),
+    linear-gradient(to bottom, transparent, black 2%, black 98%, transparent);
+  mask-composite: intersect;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.hero-slide {
+  transition: transform 1.5s cubic-bezier(0.75, 0, 0.25, 1);
+  backface-visibility: hidden;
+}
+
+.services-panel {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+}
+.services-panel-active {
+  clip-path: inset(0);
+  transition-duration: 1.2s;
+  transition-timing-function: cubic-bezier(0.12, 1, 0.28, 1);
+  transition-delay: 0s;
+}
+
+.services-names-panel {
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.8s cubic-bezier(0.75, 0, 0.25, 1);
+}
+
+.service-category-button {
+  overflow-wrap: anywhere;
+}
+
+.services-panel-active .services-names-panel {
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.75, 0, 0.25, 1) 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-panel { transition: none; }
+  .services-names-panel,
+  .services-panel-active .services-names-panel { transition: none; animation: none; }
+}
+
+.page-intro {
+  animation: intro-disappear 0.3s ease-out 1s both;
+}
+
+.hero-entering .hero-right-entrance,
+.hero-entering .hero-paper-entrance {
+  animation: tear-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-entering .hero-title-reveal { animation-delay: 0.4s; }
+.after-tear-navigation { animation: tear-edge-appear 0.3s ease-out both; }
+
+@keyframes tear-up {
+  /* Reveal the right-side treatment and paper edge together from the
+     upper-right corner toward the bottom. */
+  from { clip-path: polygon(100% 0, 100% 0, 100% 0); }
+  to { clip-path: polygon(-100% 0, 100% 0, 100% 200%); }
+}
+@keyframes tear-edge-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-intro-circle {
+  border-radius: 38% 62% 45% 55% / 57% 35% 65% 43%;
+  animation: intro-circle-grow 1.3s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+
+@keyframes intro-circle-grow {
+  from {
+    scale: 0;
+    border-radius: 32% 68% 40% 60% / 62% 30% 70% 38%;
+    rotate: -12deg;
+  }
+  60% {
+    border-radius: 55% 45% 65% 35% / 35% 62% 38% 65%;
+  }
+  to {
+    scale: 1;
+    border-radius: 38% 62% 45% 55% / 57% 35% 65% 43%;
+    rotate: 8deg;
+  }
+}
+
+@keyframes intro-disappear {
+  to { opacity: 0; }
+}
+
+.hero-title-white {
+  -webkit-text-stroke: 1px currentColor;
+}
+
+.hero-title-reveal {
+  animation: hero-title-reveal 0.7s cubic-bezier(0.75, 0, 0.25, 1) 0.8s both;
+}
+
+.hero-title-exit {
+  animation: hero-title-exit 0.7s cubic-bezier(0.75, 0, 0.25, 1) both;
+}
+
+@keyframes hero-title-reveal {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes hero-title-exit {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-intro, .page-intro-circle { animation: none; }
+  .hero-slide {
+    transition: none;
+  }
+  .hero-title-reveal { animation: none; }
+  .hero-title-exit { animation: none; opacity: 0; }
+  .hero-entering .hero-right-entrance,
+  .hero-entering .hero-paper-entrance,
+  .after-tear-navigation { animation: none; }
+}
